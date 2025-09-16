@@ -37,10 +37,10 @@ This platform facilitates the recruitment process by managing:
 
 ## Requirements
 
-- PHP >= 8.1
+- PHP >= 8.2
 - MySQL >= 5.7
 - Composer
-- Laravel 10.x
+- Laravel 12.x
 
 ## Installation
 
