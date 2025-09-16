@@ -1,0 +1,781 @@
+{
+	"info": {
+		"_postman_id": "03e8949e-b6ee-434b-bb43-dafdd2eddb79",
+		"name": "ATS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "43879640"
+	},
+	"item": [
+		{
+			"name": "Recruiter",
+			"item": [
+				{
+					"name": "Auth",
+					"item": [
+						{
+							"name": "login",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"recruiter@example.com\",\r\n  \"password\": \"123456\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Register",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n \"name\": \"Test Recruiter\",\r\n  \"email\": \"recruiter@test.com\",\r\n \"password\": \"password123\",\r\n \"password_confirmation\": \"password123\",\r\n             \r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Url}}/recruiter/auth/register",
+									"host": [
+										"{{Url}}"
+									],
+									"path": [
+										"recruiter",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "profile",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Operations",
+					"item": [
+						{
+							"name": "Jops",
+							"item": [
+								{
+									"name": "All jobs",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{recruiter_auth}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n     \"email\": \"candidate@test.com\",\r\n     \"password\": \"password123\"\r\n}"
+										},
+										"url": {
+											"raw": "{{Url}}/recruiter/jobs",
+											"host": [
+												"{{Url}}"
+											],
+											"path": [
+												"recruiter",
+												"jobs"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create Job",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{recruiter_auth}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": " {\r\n     \"title\": \"Front end Developer\",\r\n      \"description\": \"We are looking for a senior developer\",\r\n      \"status\": \"open\",  // in open , close\r\n       \"location\": \"Remote\"\r\n  }",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{Url}}/recruiter/jobs",
+											"host": [
+												"{{Url}}"
+											],
+											"path": [
+												"recruiter",
+												"jobs"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update Job",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{recruiter_auth}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": " {\r\n    // \"title\": \"Front end Developer\",\r\n    //   \"description\": \"We are looking for a senior developer\",\r\n    //   \"status\": \"open\",  // in open , close\r\n       \"location\": \"On site\"\r\n  }",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{Url}}/recruiter/jobs/4",
+											"host": [
+												"{{Url}}"
+											],
+											"path": [
+												"recruiter",
+												"jobs",
+												"4"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete Job",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{recruiter_auth}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": " {\r\n    // \"title\": \"Front end Developer\",\r\n    //   \"description\": \"We are looking for a senior developer\",\r\n    //   \"status\": \"open\",  // in open , close\r\n       \"location\": \"On site\"\r\n  }"
+										},
+										"url": {
+											"raw": "{{Url}}/recruiter/jobs/4",
+											"host": [
+												"{{Url}}"
+											],
+											"path": [
+												"recruiter",
+												"jobs",
+												"4"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Update Application Stage",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{recruiter_auth}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": " {\r\n    \"to_stage\": \"interview\", // applied,phone_screen,interview,hired,rejected\r\n    \"notes\": \"Candidate performed well in technical interview\"\r\n }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Url}}/recruiter/applications/3/stage",
+									"host": [
+										"{{Url}}"
+									],
+									"path": [
+										"recruiter",
+										"applications",
+										"3",
+										"stage"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Candidate",
+					"item": [
+						{
+							"name": "All Candidate",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{Url}}/recruiter/candidate/2",
+									"host": [
+										"{{Url}}"
+									],
+									"path": [
+										"recruiter",
+										"candidate",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete candidate",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{recruiter_auth}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{Url}}/recruiter/candidate/2",
+									"host": [
+										"{{Url}}"
+									],
+									"path": [
+										"recruiter",
+										"candidate",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Show candidate",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "mange Recruiter",
+					"item": [
+						{
+							"name": "All Recruiter",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{recruiter_auth}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{Url}}/recruiter",
+									"host": [
+										"{{Url}}"
+									],
+									"path": [
+										"recruiter"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "show Recruiter",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{recruiter_auth}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{Url}}/recruiter/1",
+									"host": [
+										"{{Url}}"
+									],
+									"path": [
+										"recruiter",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update Recruiter",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{recruiter_auth}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n \"name\": \"Amr Recruiter\"\r\n//   \"email\": \"recruiter@test.com\",\r\n//  \"password\": \"password123\",\r\n//  \"password_confirmation\": \"password123\",\r\n             \r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Url}}/recruiter/1",
+									"host": [
+										"{{Url}}"
+									],
+									"path": [
+										"recruiter",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{recruiter_auth}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n \"name\": \"Amr Recruiter\"\r\n//   \"email\": \"recruiter@test.com\",\r\n//  \"password\": \"password123\",\r\n//  \"password_confirmation\": \"password123\",\r\n             \r\n}\r\n"
+								},
+								"url": {
+									"raw": "{{Url}}/recruiter/1",
+									"host": [
+										"{{Url}}"
+									],
+									"path": [
+										"recruiter",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"name\": \"Test Recruiter\",\r\n                \"email\": \"recruiter@test.com\",\r\n                \"password\": \"password123\",\r\n                \"password_confirmation\": \"password123\",\r\n                \"company_name\": \"Test Company\"\r\n             \r\n}\r\n"
+						},
+						"url": {
+							"raw": "{{Url}}/recruiter/auth/logout",
+							"host": [
+								"{{Url}}"
+							],
+							"path": [
+								"recruiter",
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Candidate",
+			"item": [
+				{
+					"name": "Auth",
+					"item": [
+						{
+							"name": "register",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "amr condidate",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "amr@yahoo.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "password123",
+											"type": "text"
+										},
+										{
+											"key": "password_confirmation",
+											"value": "password123",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "010",
+											"type": "text"
+										},
+										{
+											"key": "resume",
+											"type": "file",
+											"src": "/C:/Users/Amr/Downloads/53696669_666818297088228_4995219511264149504_n.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{Url}}/candidate/auth/register",
+									"host": [
+										"{{Url}}"
+									],
+									"path": [
+										"candidate",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "login",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n     \"email\": \"candidate@test.com\",\r\n     \"password\": \"password123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Url}}/candidate/auth/login",
+									"host": [
+										"{{Url}}"
+									],
+									"path": [
+										"candidate",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "profile",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n     \"email\": \"candidate@test.com\",\r\n     \"password\": \"password123\"\r\n}"
+								},
+								"url": {
+									"raw": "{{Url}}/candidate/auth/profile",
+									"host": [
+										"{{Url}}"
+									],
+									"path": [
+										"candidate",
+										"auth",
+										"profile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "logout",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{candidate_auth}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n     \"email\": \"candidate@test.com\",\r\n     \"password\": \"password123\"\r\n}"
+								},
+								"url": {
+									"raw": "{{Url}}/candidate/auth/logout",
+									"host": [
+										"{{Url}}"
+									],
+									"path": [
+										"candidate",
+										"auth",
+										"logout"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Operations",
+					"item": [
+						{
+							"name": "Apply for job",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{candidate_auth}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": " {\r\n     \"cover_letter\": \"I am very interested in this position...\"\r\n\r\n }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Url}}/candidate/jobs/4/apply",
+									"host": [
+										"{{Url}}"
+									],
+									"path": [
+										"candidate",
+										"jobs",
+										"4",
+										"apply"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "Url",
+			"value": ""
+		},
+		{
+			"key": "recruiter_auth",
+			"value": ""
+		},
+		{
+			"key": "candidate_auth",
+			"value": ""
+		}
+	]
+}
