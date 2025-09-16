@@ -46,7 +46,7 @@ This platform facilitates the recruitment process by managing:
 
 1. Clone the repository:
 ```bash
-git clone https://your-repository-url/recruiter2.git
+git clone https://github.com/amr-94/ATS.git
 cd recruiter2
 ```
 
