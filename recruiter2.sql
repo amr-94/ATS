@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 16, 2025 at 10:00 PM
+-- Generation Time: Sep 17, 2025 at 11:24 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -43,7 +43,8 @@ CREATE TABLE `applications` (
 --
 
 INSERT INTO `applications` (`id`, `job_id`, `candidate_id`, `cover_letter`, `current_stage`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(3, 4, 2, 'I am very interested in this position...', 'interview', NULL, '2025-09-16 16:11:06', '2025-09-16 16:57:38');
+(3, 4, 2, 'I am very interested in this position...', 'interview', NULL, '2025-09-16 16:11:06', '2025-09-16 16:57:38'),
+(5, 6, 3, 'dasda', 'phone_screen', NULL, '2025-09-17 17:43:17', '2025-09-17 18:15:38');
 
 -- --------------------------------------------------------
 
@@ -71,7 +72,10 @@ INSERT INTO `application_stage_transitions` (`id`, `application_id`, `from_stage
 (6, 3, 'interview', 'interview', 1, 'Candidate performed well in technical interview', '2025-09-16 16:51:47', '2025-09-16 16:51:47'),
 (7, 3, 'interview', 'hired', 1, 'Candidate performed well in technical interview', '2025-09-16 16:55:41', '2025-09-16 16:55:41'),
 (8, 3, 'hired', 'interview', 1, 'Candidate performed well in technical interview', '2025-09-16 16:57:38', '2025-09-16 16:57:38'),
-(9, 3, 'interview', 'interview', 1, 'Candidate performed well in technical interview', '2025-09-16 16:57:40', '2025-09-16 16:57:40');
+(9, 3, 'interview', 'interview', 1, 'Candidate performed well in technical interview', '2025-09-16 16:57:40', '2025-09-16 16:57:40'),
+(10, 5, 'applied', 'phone_screen', 2, 'اتصلت عليه', '2025-09-17 17:44:16', '2025-09-17 17:44:16'),
+(11, 5, 'phone_screen', 'applied', 2, 'رجع تانى', '2025-09-17 17:46:34', '2025-09-17 17:46:34'),
+(12, 5, 'applied', 'phone_screen', 2, 'هتصل عليه', '2025-09-17 18:15:38', '2025-09-17 18:15:38');
 
 -- --------------------------------------------------------
 
@@ -120,7 +124,8 @@ CREATE TABLE `candidates` (
 --
 
 INSERT INTO `candidates` (`id`, `name`, `email`, `password`, `phone`, `resume_path`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(2, 'amr condidate', 'amr@yahoo.com', '$2y$12$x0YmyU3sZ1er3snGbGn0.OvY2vG2qLc9ETHzWJJDiHU6XqCoyWg/K', '010', 'Candidate/BNabrG7kcMPCRANB9FkeVjSvF241RAnoGIU0Avjh.jpg', NULL, '2025-09-15 17:48:09', '2025-09-16 15:56:43');
+(2, 'amr condidate', 'amr@yahoo.com', '$2y$12$x0YmyU3sZ1er3snGbGn0.OvY2vG2qLc9ETHzWJJDiHU6XqCoyWg/K', '010', 'Candidate/BNabrG7kcMPCRANB9FkeVjSvF241RAnoGIU0Avjh.jpg', NULL, '2025-09-15 17:48:09', '2025-09-16 15:56:43'),
+(3, 'Candidate 5eqweqw', 'Candidate5@yahoo.com', '$2y$12$Nvb7wpSps.IBBJ46TN50nesljDBwKkr3gzhWA4wIyMbmL9YoYukAS', '01032360685', 'candidates/resumes/5cmbHqyl19xy9cKMwr1j7tNlWshfeEu3nID4PRE0.pdf', NULL, '2025-09-17 17:11:29', '2025-09-17 18:08:52');
 
 -- --------------------------------------------------------
 
@@ -265,7 +270,9 @@ CREATE TABLE `recuiterjobs` (
 --
 
 INSERT INTO `recuiterjobs` (`id`, `recruiter_id`, `title`, `description`, `location`, `status`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(4, 1, 'Front end Developer', 'We are looking for a senior developer', 'On site', 'open', NULL, '2025-09-16 16:04:26', '2025-09-16 16:08:35');
+(4, 1, 'Front end Developer', 'We are looking for a senior developer', 'On site', 'open', NULL, '2025-09-16 16:04:26', '2025-09-16 16:08:35'),
+(5, 2, 'jop 1', 'asdasdasd', 'asd', 'closed', '2025-09-17 17:03:28', '2025-09-17 17:02:03', '2025-09-17 17:03:28'),
+(6, 2, 'jop new', 'dasdasdas', 'das', 'open', NULL, '2025-09-17 17:06:47', '2025-09-17 17:06:47');
 
 -- --------------------------------------------------------
 
@@ -288,7 +295,8 @@ CREATE TABLE `recuiters` (
 --
 
 INSERT INTO `recuiters` (`id`, `name`, `email`, `password`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 'Amr Recruiter', 'recruiter@test.com', '$2y$12$B2G4b6ZaqZFyXUtPT9iOS.cDtljpdc13YIWwJ9kVkArkxRZUdiLqe', NULL, '2025-09-15 17:23:11', '2025-09-16 16:42:46');
+(1, 'Amr Recruiter', 'recruiter@test.com', '$2y$12$B2G4b6ZaqZFyXUtPT9iOS.cDtljpdc13YIWwJ9kVkArkxRZUdiLqe', NULL, '2025-09-15 17:23:11', '2025-09-16 16:42:46'),
+(2, 'Recruiter  3', 'Recruiter3@yahoo.com', '$2y$12$f7aRoIW1EtlK4ErvvCQ83.Kh4twyU3cWtweVp1/RZJds94m1lHH4W', NULL, '2025-09-17 16:39:42', '2025-09-17 16:39:42');
 
 -- --------------------------------------------------------
 
@@ -310,8 +318,8 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('Cu6Zg32UQKKSg3O2VFh1luPe4SNHS5jY5bcq9VXH', NULL, '127.0.0.1', 'PostmanRuntime/7.46.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoielF3TzM0ZVhLblZhTVFkQ2htYTB5UEtjdlFIODhUTjZRNjFzdDV2aCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1757969198),
-('f6S8laFfNMeGgPxCW3v3pExHIOCWg8WAtsO0L2Tk', NULL, '127.0.0.1', 'PostmanRuntime/7.46.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiTWpkU2RtTEUzUzhqalIxQWk0ZGt2TlJCM1k4U3I5bnBaZnYweGE4aSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1758042885);
+('xin6t0gLdBrYgrVFdF8iX4tr4hrJPPSppZAEeJBn', 3, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiZGZHTGllY1RkazJWMktKRTBkY3ZKNWVUSzJlNnhwWmN6T2VkTTF0bSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9jYW5kaWRhdGUvZGFzaGJvYXJkIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo2MDoibG9naW5fY2FuZGlkYXRlLXdlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjM7fQ==', 1758143368),
+('ZAavLlq0Vgy9XorWiHUczX1Kjo7psiUNiGJZK42Q', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoidzhNRnYzQzhvdVRONlFnMWVqTURSUHV0SDY5eUlIN3pmekpkdjZQMCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDY6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9yZWNydWl0ZXIvYXBwbGljYXRpb25zLzUiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjYwOiJsb2dpbl9yZWNydWl0ZXItd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6Mjt9', 1758144232);
 
 -- --------------------------------------------------------
 
@@ -447,19 +455,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `applications`
 --
 ALTER TABLE `applications`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `application_stage_transitions`
 --
 ALTER TABLE `application_stage_transitions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `candidates`
 --
 ALTER TABLE `candidates`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -489,13 +497,13 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `recuiterjobs`
 --
 ALTER TABLE `recuiterjobs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `recuiters`
 --
 ALTER TABLE `recuiters`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
