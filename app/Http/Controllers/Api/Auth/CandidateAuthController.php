@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Candidate\StoreCandidateRequest;
+use App\Http\Requests\StoreCandidateRequest;
 use App\Resources\CandidateResource;
 use Illuminate\Http\Request;
 use App\Models\Candidate;

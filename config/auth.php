@@ -44,6 +44,14 @@ return [
             'driver' => 'sanctum',
             'provider' => 'recruiters',
         ],
+        'recruiter-web' => [
+            'driver' => 'session',
+            'provider' => 'recruiters',
+        ],
+        'candidate-web' => [
+            'driver' => 'session',
+            'provider' => 'candidates',
+        ],
         'candidate' => [
             'driver' => 'sanctum',
             'provider' => 'candidates',
@@ -111,6 +119,18 @@ return [
         'users' => [
             'provider' => 'users',
             'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'recruiters' => [
+            'provider' => 'recruiters',
+            'table' => 'password_reset_tokens',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'candidates' => [
+            'provider' => 'candidates',
+            'table' => 'password_reset_tokens',
             'expire' => 60,
             'throttle' => 60,
         ],
