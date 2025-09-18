@@ -3,23 +3,29 @@
 namespace App\Http\Controllers\Web\Recruiter;
 
 use App\Http\Controllers\Controller;
+use App\Interfaces\RecruiterRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class RecruiterController extends Controller
 {
+    protected $recruiterRepository;
+
+    public function __construct(RecruiterRepositoryInterface $recruiterRepository)
+    {
+        $this->recruiterRepository = $recruiterRepository;
+    }
+
     public function dashboard()
     {
         $recruiter = Auth::guard('recruiter-web')->user();
         $jobsCount = $recruiter->jobs()->count();
         $activeJobsCount = $recruiter->jobs()->where('status', 'open')->count();
 
-        // Get all applications from recruiter's jobs
-        $applications = collect();
-        foreach ($recruiter->jobs as $job) {
-            $applications = $applications->concat($job->applications);
-        }
+        $applications = $recruiter->jobs()->with('applications')->get()
+            ->pluck('applications')
+            ->flatten();
 
         $recentApplications = $applications->sortByDesc('created_at')->take(5);
 
@@ -44,7 +50,7 @@ class RecruiterController extends Controller
 
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:recuiters,email,' . $recruiter->id,
+            'email' => 'required|email|unique:recruiters,email,' . $recruiter->id,
         ]);
 
         $data = $request->only(['name', 'email']);
@@ -62,7 +68,7 @@ class RecruiterController extends Controller
             $data['password'] = Hash::make($request->password);
         }
 
-        $recruiter->update($data);
+        $this->recruiterRepository->update($recruiter->id, $data);
 
         return back()->with('success', 'Profile updated successfully');
     }

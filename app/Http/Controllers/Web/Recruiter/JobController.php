@@ -3,12 +3,21 @@
 namespace App\Http\Controllers\Web\Recruiter;
 
 use App\Http\Controllers\Controller;
-use App\Models\Job;
+use App\Http\Requests\Job\StoreJobRequest;
+use App\Http\Requests\Job\UpdateJobRequest;
+use App\Interfaces\JobRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class JobController extends Controller
 {
+    protected $jobRepository;
+
+    public function __construct(JobRepositoryInterface $jobRepository)
+    {
+        $this->jobRepository = $jobRepository;
+    }
+
     public function index()
     {
         $jobs = Auth::guard('recruiter-web')->user()
@@ -25,16 +34,14 @@ class JobController extends Controller
         return view('recruiter.jobs.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreJobRequest $request)
     {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'location' => 'required|string|max:255',
-            'status' => 'required|in:open,closed',
-        ]);
 
-        Auth::guard('recruiter-web')->user()->jobs()->create($request->all());
+
+        $data = $request->validated();
+        $data['recruiter_id'] = Auth::guard('recruiter-web')->id();
+
+        $this->jobRepository->create($data);
 
         return redirect()
             ->route('recruiter.jobs.index')
@@ -43,27 +50,27 @@ class JobController extends Controller
 
     public function edit($id)
     {
-        $job = Auth::guard('recruiter-web')->user()
-            ->jobs()
-            ->findOrFail($id);
+
+        $job = $this->jobRepository->show($id);
+
+        if ($job->recruiter_id !== Auth::guard('recruiter-web')->id()) {
+            abort(403, 'Unauthorized action.');
+        }
 
         return view('recruiter.jobs.edit', compact('job'));
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateJobRequest $request, $id)
     {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'location' => 'required|string|max:255',
-            'status' => 'required|in:open,closed',
-        ]);
+        $data =  $request->validated();
 
-        $job = Auth::guard('recruiter-web')->user()
-            ->jobs()
-            ->findOrFail($id);
+        $job = $this->jobRepository->show($id);
 
-        $job->update($request->all());
+        if ($job->recruiter_id !== Auth::guard('recruiter-web')->id()) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $this->jobRepository->update($id, $data);
 
         return redirect()
             ->route('recruiter.jobs.index')
@@ -72,11 +79,13 @@ class JobController extends Controller
 
     public function destroy($id)
     {
-        $job = Auth::guard('recruiter-web')->user()
-            ->jobs()
-            ->findOrFail($id);
+        $job = $this->jobRepository->show($id);
 
-        $job->delete();
+        if ($job->recruiter_id !== Auth::guard('recruiter-web')->id()) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $this->jobRepository->delete($id);
 
         return redirect()
             ->route('recruiter.jobs.index')
