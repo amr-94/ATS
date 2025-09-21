@@ -8,6 +8,7 @@ use App\Http\Controllers\Web\Recruiter\ApplicationStageController;
 use App\Http\Controllers\Web\Candidate\ApplicationController;
 use App\Http\Controllers\Web\Candidate\CandidateController;
 use App\Http\Controllers\Web\Recruiter\RecruiterController;
+use App\Http\Controllers\Web\Recruiter\ZoomMeetingController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -42,6 +43,16 @@ Route::prefix('recruiter')->group(function () {
         Route::get('/applications', [ApplicationStageController::class, 'index'])->name('recruiter.applications.index');
         Route::get('/applications/{id}', [ApplicationStageController::class, 'show'])->name('recruiter.applications.show');
         Route::put('/applications/{id}/stage', [ApplicationStageController::class, 'updateStage'])->name('recruiter.applications.updateStage');
+
+
+
+        // إنشاء اجتماع
+        Route::post('applications/{application}/zoom-meeting', [ZoomMeetingController::class, 'createMeeting'])
+            ->name('zoom-meetings.store');
+
+        // عرض الاجتماعات الخاصة بتطبيق معين
+        Route::get('/applications/{application}/zoom-meetings', [ZoomMeetingController::class, 'index'])
+            ->name('zoom-meetings.index');
     });
 });
 

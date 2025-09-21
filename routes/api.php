@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\Recruiter\ApplicationStageController;
 use App\Http\Controllers\Api\Candidate\ApplicationController;
 use App\Http\Controllers\Api\Candidate\CandidateController;
 use App\Http\Controllers\Api\Recruiter\RecruiterController;
+use App\Http\Controllers\Api\Recruiter\ZoomMeetingController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -65,5 +66,8 @@ Route::prefix('v1')->group(
             // View My Applications
             Route::get('/applications', [ApplicationController::class, 'myApplications']);
         });
+
+
+        Route::post('applications/{application}/zoom-meeting', [ZoomMeetingController::class, 'createMeeting']);
     }
 );

@@ -29,4 +29,8 @@ class Application extends Model
     {
         return $this->hasMany(ApplicationStageTransition::class);
     }
+    public function zoomMeeting()
+    {
+        return $this->hasOne(\App\Models\ZoomMeeting::class, 'application_id');
+    }
 }
