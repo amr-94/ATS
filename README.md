@@ -5,62 +5,77 @@ A Laravel-based REST API for managing job applications, recruiters, and candidat
 ## Overview
 
 This platform facilitates the recruitment process by managing:
-- Job postings by recruiters
-- Candidate applications
-- Application status tracking
-- Multi-stage recruitment process
+
+-   Job postings by recruiters
+-   Candidate applications
+-   Application status tracking
+-   Multi-stage recruitment process
 
 ## Features
 
-- **Authentication**
-  - Separate auth for recruiters and candidates
-  - Token-based authentication using Sanctum
-  
-- **Recruiters**
-  - Create and manage job postings
-  - Track applications
-  - Update application stages
-  - Manage profile
+-   **Authentication**
+    -   Separate auth for recruiters and candidates
+    -   Token-based authentication using Sanctum
+-   **Recruiters**
 
-- **Candidates**
-  - Apply for jobs
-  - Upload resumes
-  - Track application status
-  - Manage profile
+    -   Create and manage job postings
+    -   Track applications
+    -   Update application stages
+    -   Manage profile
 
-- **Application Stages**
-  - Applied
-  - Phone Screen
-  - Interview
-  - Hired
-  - Rejected
+-   **Candidates**
+
+    -   Apply for jobs
+    -   Upload resumes
+    -   Track application status
+    -   Manage profile
+
+-   **Application Stages**
+
+    -   Applied
+    -   Phone Screen
+    -   Interview
+    -   Hired
+    -   Rejected
+
+-   **Zoom Integration**
+
+This platform includes an integration with Zoom Meetings:
+
+-   Recruiters can automatically create a Zoom meeting when moving an application stage to Interview.
+-   Candidates receive the meeting details and can join directly.
+-   This feature helps streamline interview scheduling and reduces manual work.
 
 ## Requirements
 
-- PHP >= 8.2
-- MySQL >= 5.7
-- Composer
-- Laravel 12.x
+-   PHP >= 8.2
+-   MySQL >= 5.7
+-   Composer
+-   Laravel 12.x
 
 ## Installation
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/amr-94/ATS.git
 cd recruiter2
 ```
 
 2. Install dependencies:
+
 ```bash
 composer install
 ```
 
 3. Create environment file:
+
 ```bash
 cp .env.example .env
 ```
 
 4. Configure your database in `.env`:
+
 ```env
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
@@ -71,16 +86,19 @@ DB_PASSWORD=your_password
 ```
 
 5. Generate application key:
+
 ```bash
 php artisan key:generate
 ```
 
 6. Run migrations:
+
 ```bash
 php artisan migrate
 ```
 
 7. Create storage link for resumes:
+
 ```bash
 php artisan storage:link
 ```
@@ -88,6 +106,7 @@ php artisan storage:link
 ## API Endpoints
 
 ### Auth Routes
+
 ```
 POST /api/v1/recruiter/auth/register
 POST /api/v1/recruiter/auth/login
@@ -96,6 +115,7 @@ POST /api/v1/candidate/auth/login
 ```
 
 ### Protected Routes
+
 ```
 # Recruiter Routes
 GET    /api/v1/recruiter/jobs
@@ -113,6 +133,7 @@ GET    /api/v1/candidate/applications
 ## Authentication
 
 The API uses Laravel Sanctum for authentication. Include the token in requests:
+
 ```
 Authorization: Bearer {your_token}
 ```
@@ -124,6 +145,7 @@ Resumes are stored in `storage/app/public/resumes`. Make sure this directory is 
 ## Error Handling
 
 The API returns consistent error responses:
+
 ```json
 {
     "status": "error",
@@ -135,6 +157,7 @@ The API returns consistent error responses:
 ## Success Responses
 
 Successful responses follow this format:
+
 ```json
 {
     "status": "success",
